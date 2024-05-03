@@ -1,0 +1,110 @@
+//? barre de navigation, les en-têtes de section et les boutons principaux
+$dark-blue-primary: #154360;
+//? lien et boutons
+$blue-accent: #0c68a1;
+//? texte principal
+$black: #121212;
+//? textes secondaires 
+$blue-grey: #34495E;
+//? textes sur fonds foncés 
+$white: #FFFFFF;
+//? actions réussies
+$green: #2ECC71;
+//? actions d'erreur
+$red: #E74C3C;
+//? fond moins importants ou pour apporter de la profondeur à l'interface.
+$grey: #D0D0D0;
+
+* {
+    font-family: "nunito";
+    margin: 0;
+}
+
+p {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.loginParent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    overflow-y: hidden;
+
+    >div {
+        width: 60%;
+
+        &:first-child {
+            margin: 0 7%;
+            width: 40%;
+
+
+            .title {
+                font-weight: 800;
+                font-size: 28px;
+                color: $black;
+            }
+
+            .signIn {
+                margin: 40px 0;
+            }
+
+            form {
+                >div {
+                    margin-bottom: 40px;
+
+                    input {
+                        width: -moz-available;
+                        border: 1px solid $grey;
+                        border-radius: 10px;
+                        padding: 10px;
+                    }
+
+                    &:nth-child(2) {
+                        >div {
+
+                            position: relative;
+
+                            #showPassword {
+                                position: absolute;
+                                top: 50%;
+                                right: 3%;
+                                transform: translateY(-50%);
+                                cursor: pointer;
+                                padding: 10px 0;
+                                user-select: none;
+                            }
+
+                            #handleError {}
+                        }
+                    }
+                }
+
+                #submit {
+                    width: 100%;
+                    border: 1px solid;
+                    background: linear-gradient(-10deg, $dark-blue-primary, $blue-accent); // Applique un gradient diagonal de haut en bas vers la droite
+                    color: $white;
+                    border-radius: 10px;
+                    padding: 10px;
+
+                    &:hover {
+                        background: linear-gradient(10deg, $blue-accent, $dark-blue-primary); // Inverse le gradient au survol
+                    }
+                }
+
+
+            }
+        }
+
+        img {
+            width: 100%;
+            height: 101vh;
+            object-fit: cover;
+        }
+    }
+}

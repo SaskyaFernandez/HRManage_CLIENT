@@ -1,22 +1,14 @@
-import { useEffect } from 'react';
-import {login} from './services/hrmanage.service.js';
+import React from 'react';
+import { Outlet } from 'react-router-dom';
 
 function App() {
-  useEffect(() => {
-    login("fernandez@hrmange.com", "oui")
-      .then(e => {
-        console.log('connection à la db')
-        console.log(e)
-      })
-      .catch((e) => {
-        console.error(e.response.data.error); // "oh, no!"
-      })
-  },[])
+
   return (
-    <>
-      
-    </>
-  )
+    <div>
+      <h1>App</h1>
+      <Outlet />
+    </div>
+  );
 }
 
-export default App
+export default App;
