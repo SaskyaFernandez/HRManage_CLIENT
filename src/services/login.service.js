@@ -9,7 +9,6 @@ export const login = async (email,password) => {
         password: password
     }) 
 
-    const data = response.data
-    // console.log(data);
+    const data = response.data;
     return data;
 };

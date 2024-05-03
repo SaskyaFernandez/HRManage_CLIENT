@@ -1,14 +1,24 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import Sidebar from './composants/sidebar/sidebar';
+import DashboardContent from './composants/dashboard/dashboard';
 
-function App() {
+const App = () => {
+  const location = useLocation();
+  const hideSidebar = location.pathname === "/login";
 
   return (
-    <div>
-      <h1>App</h1>
-      <Outlet />
+    <div className="dashboard">
+      {!hideSidebar ? (
+        <div>
+          <Sidebar />
+          <DashboardContent />
+        </div>
+      ) : (
+        <DashboardContent />
+      )}
     </div>
   );
-}
+};
 
 export default App;

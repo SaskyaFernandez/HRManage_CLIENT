@@ -1,6 +1,6 @@
-// import { atom } from 'recoil';
+import { atom } from 'recoil';
 
-// export const tokenAtom = atom({
-//     key: 'jwt',
-//     default: null
-// });
+export const tokenAtom = atom({
+    key: 'jwt',
+    default: null
+});

@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginComposant from '../composants/Auth/login/login';
+import LoginForm from '../composants/Auth/login/login';
 const Login = () => {
     return (
         <div className='loginParent'>
@@ -8,10 +8,10 @@ const Login = () => {
                     <p>Welcome!!</p>
                     <h1 className='title'>Please Sign In</h1>
                 </div>
-                <LoginComposant />
+                <LoginForm />
             </div>
             <div>
-                <img src="../public/loginImage.jpeg" alt="image" />
+                <img src="/loginImage.jpeg" alt="image" />
             </div>
         </div>
     )

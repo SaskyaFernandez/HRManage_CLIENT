@@ -6,14 +6,13 @@ import { routes } from './routes/index.jsx';
 
 const router = createBrowserRouter(routes);
 
-const rootElement = document.getElementById('root');
+import { RecoilRoot } from 'recoil';
 
-if (rootElement) {
-  ReactDOM.createRoot(rootElement).render(
-    <React.StrictMode>
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <RecoilRoot>
       <RouterProvider router={router} />
-    </React.StrictMode>
-  );
-} else {
-  console.error("L'élément root n'a pas été trouvé dans le DOM.");
-}
+    </RecoilRoot>
+  </React.StrictMode>,
+);

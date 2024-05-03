@@ -1,30 +1,39 @@
-//? barre de navigation, les en-têtes de section et les boutons principaux
 $dark-blue-primary: #154360;
-//? lien et boutons
 $blue-accent: #0c68a1;
-//? texte principal
 $black: #121212;
-//? textes secondaires 
-$blue-grey: #34495E;
-//? textes sur fonds foncés 
+$dark-blue-grey: #476685;
+$light-blue-grey : #D0D0D0;
+$grey: #f3f6f9;
 $white: #FFFFFF;
-//? actions réussies
 $green: #2ECC71;
-//? actions d'erreur
 $red: #E74C3C;
-//? fond moins importants ou pour apporter de la profondeur à l'interface.
-$grey: #D0D0D0;
-
 * {
     font-family: "nunito";
     margin: 0;
 }
-
 p {
     font-size: 14px;
     font-weight: 400;
 }
-
+.sidebar {
+    float: left;
+    width: 200px;
+    height: 100vh;
+    background-color: #333;
+    color: #fff;
+}
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+.sidebar ul li {
+    padding: 10px;
+    cursor: pointer;
+}
+.dashboard-content {
+    margin-left: 220px;
+    padding: 20px;
+}
 .loginParent {
     display: flex;
     align-items: center;
@@ -34,41 +43,31 @@ p {
     position: absolute;
     top: 0;
     overflow-y: hidden;
-
     >div {
         width: 60%;
-
         &:first-child {
             margin: 0 7%;
             width: 40%;
-
-
             .title {
                 font-weight: 800;
                 font-size: 28px;
                 color: $black;
             }
-
             .signIn {
                 margin: 40px 0;
             }
-
             form {
                 >div {
                     margin-bottom: 40px;
-
                     input {
                         width: -moz-available;
-                        border: 1px solid $grey;
+                        border: 1px solid $light-blue-grey;
                         border-radius: 10px;
                         padding: 10px;
                     }
-
                     &:nth-child(2) {
                         >div {
-
                             position: relative;
-
                             #showPassword {
                                 position: absolute;
                                 top: 50%;
@@ -78,12 +77,9 @@ p {
                                 padding: 10px 0;
                                 user-select: none;
                             }
-
-                            #handleError {}
                         }
                     }
                 }
-
                 #submit {
                     width: 100%;
                     border: 1px solid;
@@ -96,15 +92,46 @@ p {
                         background: linear-gradient(10deg, $blue-accent, $dark-blue-primary); // Inverse le gradient au survol
                     }
                 }
-
-
             }
         }
-
         img {
             width: 100%;
             height: 101vh;
             object-fit: cover;
         }
     }
+}
+.holidaysParent {
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        border: 1px solid $grey;
+    }
+    th {
+        padding: 8px;
+        text-align: left;
+        background-color: $dark-blue-grey;
+        border-bottom: 1px solid $dark-blue-grey;
+        color: $white;
+    }
+    td {
+        padding: 8px;
+        border-bottom: 1px solid $grey;
+    }
+    tr:nth-child(even) {
+        background-color: $grey;
+    }
+    a {
+        color: $blue-accent;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+    h1 {
+        color: #333;
+    }
+    h2 {
+        color: $dark-blue-grey;
+    }
+
 }

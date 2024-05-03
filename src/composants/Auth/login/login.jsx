@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
-import { login } from '../../../services/hrmanage.service.js';
+import { login } from '../../../services/login.service.js';
+import { useRecoilState } from 'recoil';
+import { tokenAtom } from '../../../atoms/token.atom.js';
+import { Navigate } from 'react-router-dom';
 
-const LoginComposant = () => {
+const LoginForm = () => {
+
+    const [token, setToken] = useRecoilState(tokenAtom);
+
+
     const [email, setEmail] = useState('fernandez@hrmange.com');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
@@ -20,18 +27,21 @@ const LoginComposant = () => {
         e.preventDefault();
         try {
             if (email && password) {
-                await login(email, password);
+                const response = await login(email, password); // Récupérer la réponse de la requête
                 console.log('Connexion réussie');
+                console.log("response",response); // Afficher la réponse dans la console
+                setToken(response);
                 setError('');
                 setShowError(false);
             }
         } catch (error) {
-            console.error(error);
             setError(error.response.data.error);
             setShowError(true);
         }
     };
-
+    if (!!token) {
+        return <Navigate to='/holidays' />
+    }
     const handleShowPassword = () => {
         setShowPassword(!showPassword);
     };
@@ -57,4 +67,4 @@ const LoginComposant = () => {
     );
 };
 
-export default LoginComposant;
+export default LoginForm;
