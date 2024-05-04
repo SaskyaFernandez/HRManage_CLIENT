@@ -1,13 +1,10 @@
-import { useRecoilValue } from 'recoil';
-import { tokenAtom } from '../../atoms/token.atom.js';
 import { Navigate } from 'react-router-dom';
+import useLocalStorage from '../../hooks/useLocalStorage.js';
 
 const PrivateRoute = ({ element }) => {
+    const [getToken, _] = useLocalStorage()
 
-    const token = useRecoilValue(tokenAtom);
-    console.log('Here', token);
-
-    if (!token) {
+    if (!getToken("token")) {
         return <Navigate to='/login' />;
     }
 

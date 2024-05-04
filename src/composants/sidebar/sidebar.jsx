@@ -1,9 +1,8 @@
 import { useNavigate } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
-import { tokenAtom } from '../../atoms/token.atom';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 const Sidebar = () => {
-    const [token, setToken] = useRecoilState(tokenAtom);
+    const [_, setToken] = useLocalStorage();
     const navigate = useNavigate();
 
     const handleLogout = (e) => {

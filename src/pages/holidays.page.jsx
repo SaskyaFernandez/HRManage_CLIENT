@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useRecoilValue } from 'recoil';
 import holidaysController from '../services/holidays.service';
-import { tokenAtom } from '../atoms/token.atom';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 const Holidays = () => {
-    const token = useRecoilValue(tokenAtom);
+    const [token, _] = useLocalStorage()
+    
     const [holidays, setHolidays] = useState([]);
 
     useEffect(() => {
