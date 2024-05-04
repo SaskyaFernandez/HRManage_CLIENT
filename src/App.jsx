@@ -8,12 +8,12 @@ const App = () => {
   const hideSidebar = location.pathname === "/login";
 
   return (
-    <div className="dashboard">
+    <div className="body">
       {!hideSidebar ? (
-        <div>
+        <>
           <Sidebar />
           <DashboardContent />
-        </div>
+        </>
       ) : (
         <DashboardContent />
       )}

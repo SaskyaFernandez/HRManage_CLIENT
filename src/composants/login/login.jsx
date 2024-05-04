@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { login } from '../../../services/login.service.js';
+import { login } from '../../services/login.service.js';
 import { useNavigate } from "react-router-dom";
-import useLocalStorage from '../../../hooks/useLocalStorage.js';
+import useLocalStorage from '../../hooks/useLocalStorage.js';
 
 const LoginForm = () => {
     const [ _ , setToken] = useLocalStorage();
