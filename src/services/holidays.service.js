@@ -4,35 +4,35 @@ const axiosInstance = axios.create({
     baseURL: import.meta.env.VITE_BASE_URL
 });
 
-const config = (tokenAtom) => ({
-    headers: { Authorization: `Bearer ${tokenAtom}` }
+const config = (token) => ({
+    headers: { Authorization: `Bearer ${token}` }
 });
 
 const holidaysController = {
-    getAllHolidays: async (tokenAtom) => {
+    getAllHolidays: async (token) => {
         try {
-            const response = await axiosInstance.get('/api/holidays/all', config(tokenAtom));
+            const response = await axiosInstance.get('/api/holidays/all', config(token));
             return response.data.holidays;
         } catch (error) {
             console.error('Error fetching all holidays:', error);
             throw error;
         }
     },
-    getHolidaysByUserID: async (tokenAtom, id) => {
+    getHolidaysByUserID: async (token, id) => {
         try {
-            const response = await axiosInstance.get(`/api/holidays/${id}`, config(tokenAtom));
+            const response = await axiosInstance.get(`/api/holidays/${id}`, config(token));
             return response.data.holidays;
         } catch (error) {
             console.error('Error fetching all holidays:', error);
             throw error;
         }
     },
-    createHoliday: async (tokenAtom, startdateData,enddateData) => {
+    createHoliday: async (token, startdateData,enddateData) => {
         try {
             const response = await axiosInstance.post(`/api/holidays/`, {
                 startdate: startdateData, // Date de début corrigée
                 enddate:  enddateData   // Date de fin corrigée
-            }, config(tokenAtom));
+            }, config(token));
             console.log(response);
             return response.data.holidays;
         } catch (error) {
