@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import Sidebar from './composants/sidebar/sidebar';
-import DashboardContent from './composants/dashboard/dashboard';
+import Sidebar from './components/sidebar/sidebar';
+import DashboardContent from './components/dashboard/dashboard';
 
 const App = () => {
   const location = useLocation();
