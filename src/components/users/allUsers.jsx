@@ -45,6 +45,10 @@ const AllUsers = () => {
         }
         return setOrderedBy("")
     }
+    const formatDate = (dateString) => {
+        const options = { day: '2-digit', month: 'short', year: 'numeric' };
+        return new Date(dateString).toLocaleDateString('fr-FR', options);
+    };
     const onClickUser = (id) => {
         let userByID = users.filter((u) => u.id == id);
         if (userByID.length > 0) {
@@ -59,7 +63,7 @@ const AllUsers = () => {
                         <caption>Users list</caption>
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th className={`orderBy ${orderedBy}`} onClick={() => orderByNumber("id")}>ID</th>
                                 <th className={`orderBy ${orderedBy}`} onClick={() => orderByString("firstname")}>Firstname</th>
                                 <th>Lastname</th>
                                 <th className={`orderBy ${orderedBy}`} onClick={() => orderByString("email")}>Email</th>
@@ -75,7 +79,7 @@ const AllUsers = () => {
                                     <td>{firstname}</td>
                                     <td>{lastname}</td>
                                     <td>{email}</td>
-                                    <td>{entrydate}</td>
+                                    <td>{formatDate(entrydate)}</td>
                                     <td>{maxholidays}</td>
                                     <td>{holidaysleft}</td>
                                 </tr>

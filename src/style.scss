@@ -29,6 +29,8 @@ p {
     position: absolute;
     top: 0;
     overflow-y: hidden;
+    margin: 0!important;
+    padding: 0!important;
 
     >div {
         width: 60%;
@@ -114,14 +116,62 @@ body {
                 padding: 35px 25px 10px;
             }
 
-            div {
+            .profil {
+                display: flex;
+                flex-direction: row;
+
+                >div {
+                    width: 60%;
+                    padding: 0 20px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-evenly;
+                    align-items: flex-start;
+
+                    .firstname {
+                        text-transform: capitalize;
+                        font-size: 16px;
+                        font-weight: 600;
+                        white-space: nowrap;
+                    }
+
+                    .role,
+                    .logout {
+                        color: $black;
+                        font-weight: 400;
+                        font-size: 14px;
+                    }
+
+                    .logout {
+                        text-decoration: none;
+
+                        svg {
+                            margin-right: 5px;
+                            height: auto;
+                            color: #BFBFBF;
+                        }
+                    }
+
+                }
+
+                img {
+                    width: 40%;
+                    height: 85px;
+                    object-fit: cover;
+                      border-radius: 12px;
+                }
+            }
+
+            >div {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
-                padding: 10px 25px;
+                padding: 20px;
                 font-weight: 500;
 
-
+                &.mainMenu {
+                    padding: 50px 30px 0 30px;
+                }
 
                 >p {
                     padding: 10px 20px;
@@ -133,6 +183,7 @@ body {
                 a {
                     display: flex;
                     align-items: center;
+
                     &.navbar__link {
                         padding: 10px 20px;
                         cursor: pointer;
@@ -166,26 +217,71 @@ body {
             flex: 4.5;
             min-height: 100vh;
             display: flex;
-            justify-content: space-evenly;
+            justify-content: space-between;
             align-items: flex-start;
+            flex-wrap: wrap;
 
-            .holidaysParent {
+            >div {
                 background-color: $white;
-                padding: 20px;
                 border-radius: 20px;
                 width: 100%;
-                margin: 10px;
-
-                h1 {
-                    color: #333;
+                margin: 30px;
+                padding: 20px;
+                &.datePicker{
+                    width: 25%!important;
                 }
+            }
+            h2{
+                border: 8px solid white;
+                border-bottom-width: 8px;
+                border-bottom-style: solid;
+                border-bottom-color: white;
+                border-bottom: 1px solid #FFFFFF;
+                text-align: start;
+                font-size: 28px;
+                font-weight: 700;
+                color: #333;
+                position: sticky;
+                top: 0;
+                background-color: #FFFFFF;
+            }
+            .holidaysParent div {
+                position: relative;
+                max-height: 400px;
+                overflow-y: scroll;
 
                 table {
-                    border-collapse: separate;
-                    border-spacing: 0px 15px;
+                    border-spacing: 0px;
+                    padding: 10px;
                     width: 100%;
+                    position: sticky;
+                    background-color: $white;
+
+                    caption {
+                        border: 8px solid white;
+                        border-bottom: 1px solid $white;
+                        text-align: start;
+                        font-size: 28px;
+                        font-weight: 700;
+                        color: #333;
+                        position: sticky;
+                        top: 0;
+                        background-color: $white;
+
+                    }
+
+                    thead {
+                        border: 8px solid white;
+                        border-bottom: 1px solid $white;
+                        position: sticky;
+                        top: 47px;
+                        background-color: $white;
+                        z-index: 12;
+
+                    }
 
                     tr {
+
 
                         th {
                             padding: 8px;
@@ -245,6 +341,7 @@ body {
 
                         td {
                             padding: 8px;
+                            border: 8px solid white;
                             border-bottom: 1px solid $grey;
 
                             &.Approved {
@@ -304,8 +401,9 @@ body {
                     }
 
                 }
-
             }
+
+
         }
     }
 }
