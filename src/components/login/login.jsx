@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { login } from '../../services/login.service.js';
 import { useNavigate } from "react-router-dom";
 import useLocalStorage from '../../hooks/useLocalStorage.js';
+import { jwtDecode } from 'jwt-decode';
+import usersController from '../../services/user.service.js';
+import Context from '../../contexts/CurrentUserContext.jsx';
 
 const LoginForm = () => {
-    const [ _ , setToken] = useLocalStorage();
+    const [token, setToken] = useLocalStorage();
+    const currentUserContext = useContext(Context)
 
     const [email, setEmail] = useState('fernandez@hrmange.com');
     const [password, setPassword] = useState('');
@@ -30,7 +34,13 @@ const LoginForm = () => {
                 setToken("token", response);
                 setError('');
                 setShowError(false);
-                navigate('/profil');
+                console.log('1');
+                const decodedToken = jwtDecode(response);
+                setToken("id", decodedToken.userId);
+                console.log('1');
+                const user = await usersController.getUserByEmail(response, email)
+                currentUserContext.setUser(user)
+                navigate('/dashboard');
             }
         } catch (error) {
             setError(error.response.data.error);

@@ -1,49 +1,57 @@
 import { NavLink } from 'react-router-dom';
-import useLocalStorage from '../../hooks/useLocalStorage';
+import { CgProfile } from "react-icons/cg";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { FaCarSide } from "react-icons/fa6";
 import { IoMdLogOut } from "react-icons/io";
+import { useContext } from 'react';
+import Context from '../../contexts/CurrentUserContext';
+
 const Sidebar = () => {
-    const [_, setToken] = useLocalStorage();
+    const currentUserContext = useContext(Context);
 
     const handleLogout = () => {
         localStorage.clear();
     }
+
     return (
         <div className="sidebar">
-            <h2>NAME</h2>
-            <div>
+            <div className="profil">
+                {currentUserContext.user.image ? (
+                    <img src={currentUserContext.user.image} alt="image profile" />
+                ) : (
+                    <img src="/loginImage.jpeg" alt="image profile" />
+                )}
+                {currentUserContext.user && (
+                    <div>
+                        {currentUserContext.user.firstname && currentUserContext.user.lastname  ? (
+                            <p className='firstname'>{currentUserContext.user.firstname} {currentUserContext.user.lastname} </p>
+                        ) : (
+                            <p>Name</p>
+                        )}
+                        {currentUserContext.user.role && (
+                            <p className='role'>{currentUserContext.user.role.map(role => role.name)}</p>
+                        )}
+                        <NavLink className="logout" to="/login" onClick={handleLogout}>
+                            <IoMdLogOut /> Logout
+                        </NavLink>
+                    </div>
+                )}
+            </div>
+            <div className='mainMenu'>
                 <p>Main Menu</p>
-                <NavLink
-                    exact
-                    activeClassName="navbar__link--active"
-                    className="navbar__link"
-                    to="/dashboard">
-                    <LuLayoutDashboard /> Dashboard 
+                <NavLink className={({ isActive }) => (isActive ? 'navbar__link active' : 'navbar__link')} to="/dashboard">
+                    <LuLayoutDashboard /> Dashboard
                 </NavLink>
-                <NavLink
-                    activeClassName="navbar__link--active"
-                    className="navbar__link"
-                    to="/holidays">
+                <NavLink className={({ isActive }) => (isActive ? 'navbar__link active' : 'navbar__link')} to="/holidays">
                     <FaCarSide /> Holidays
                 </NavLink>
-                <NavLink
-                    activeClassName="navbar__link--active"
-                    className="navbar__link"
-                    to="/profil">
-                    <FaCarSide /> Profil
-                </NavLink>
-                <NavLink
-                    activeClassName="navbar__link--active"
-                    className="navbar__link"
-                    to="/login"
-                >
-                    <a type='button' onClick={handleLogout}>
-                       <IoMdLogOut /> Logout
-                    </a>
+                <NavLink className={({ isActive }) => (isActive ? 'navbar__link active' : 'navbar__link')} to="/profil">
+                    <CgProfile /> Profil
                 </NavLink>
             </div>
+
         </div>
     );
 };
-export default Sidebar
+
+export default Sidebar;
