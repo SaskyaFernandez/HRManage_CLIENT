@@ -1,22 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import holidaysController from '../../services/holidays.service';
 import useLocalStorage from '../../hooks/useLocalStorage';
+import { useContext } from 'react';
+import Context from '../../contexts/CurrentUserContext';
 
-const HolidaysByUserID = () => {
-    const [getToken, _] = useLocalStorage()
-    const [holidays, setHolidays] = useState([]);
-    const [orderedBy, setOrderedBy] = useState("");
+    const HolidaysByUserID = () => {
+        const [getToken, _] = useLocalStorage()
+        const [holidays, setHolidays] = useState([]);
+        const [orderedBy, setOrderedBy] = useState("");
+        const currentUserContext = useContext(Context);
+        
+        useEffect(() => {
+            async () => {
+                try {
+                    const holidayByID = await holidaysController.getHolidaysByUserID(getToken('token'), currentUserContext.user.id);
+                    console.log("1");
+                    console.log(holidayByID);
+                    return setHolidays(holidayByID);
+                } catch (error) {
+                    console.error('Error fetching holidays:', error);
+                }
+            };
+        }, []);
 
-    useEffect(() => {
-        const postHolidays = async (startDate,endDate) => {
-            try {
-                const createRequestHoliday = await holidaysController.createHoliday(getToken('token'), startDate,endDate);
-                return createRequestHoliday;
-            } catch (error) {
-                console.error('Error fetching holidays:', error);
-            }
-        };
-    }, []);
 
     const orderBy = (sorting) => {
         if (orderedBy !== "ASC") {
@@ -32,11 +38,10 @@ const HolidaysByUserID = () => {
     }
     return (
         <div className='holidaysParent'>
-            <h1>Holidays list</h1>
+            <h1>My holidays requests </h1>
             <table>
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th className={`orderBy ${orderedBy}`} onClick={() => orderBy("startdate")}>Start date</th>
                         <th>End date</th>
                         <th className={`orderBy ${orderedBy}`} onClick={() => orderBy("isaccepted")}>Request status</th>
@@ -45,7 +50,6 @@ const HolidaysByUserID = () => {
                 <tbody>
                     {holidays.map(({ id, startdate, enddate, isaccepted }) => (
                         <tr key={id}>
-                            <td>{id}</td>
                             <td>{startdate}</td>
                             <td>{enddate}</td>
                             <td className={isaccepted}>{isaccepted}</td>

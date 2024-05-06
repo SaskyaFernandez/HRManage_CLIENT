@@ -6,7 +6,7 @@ import holidaysController from '../../services/holidays.service';
 
 const RequestHolidays = () => {
    const today = new Date();
-    const [value, setValue] = React.useState(["", ""]);
+    const [value, setValue] = React.useState([]);
     const [getToken, _] = useLocalStorage();
     function formatDate(date) {
         var d = new Date(date),
@@ -45,10 +45,11 @@ const RequestHolidays = () => {
                     ranges={[]}
                     showOneCalendar
                     format="dd.MM.yyyy"
+                    placeholder="request a holiday"
                     shouldDisableDate={(date) => date < today}
                     showHeader={false}
                 />
-                <button type="submit">Submit</button>
+                <button id='submit' type="submit">Submit</button>
             </form>
         </div>
     );

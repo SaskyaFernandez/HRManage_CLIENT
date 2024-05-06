@@ -20,8 +20,11 @@ const holidaysController = {
     },
     getHolidaysByUserID: async (token, id) => {
         try {
+            console.log(id );
+            console.log(token);
             const response = await axiosInstance.get(`/api/holidays/${id}`, config(token));
-            return response.data.holidays;
+            console.log(response.data.holidaysByUserID);
+            return response.data.holidaysByUserID;
         } catch (error) {
             console.error('Error fetching all holidays:', error);
             throw error;
