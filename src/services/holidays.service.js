@@ -20,10 +20,8 @@ const holidaysController = {
     },
     getHolidaysByUserID: async (token, id) => {
         try {
-            console.log(id );
-            console.log(token);
+            console.log('ID SERVICE:' , id);
             const response = await axiosInstance.get(`/api/holidays/${id}`, config(token));
-            console.log(response.data.holidaysByUserID);
             return response.data.holidaysByUserID;
         } catch (error) {
             console.error('Error fetching all holidays:', error);
@@ -33,11 +31,10 @@ const holidaysController = {
     createHoliday: async (token, startdateData,enddateData) => {
         try {
             const response = await axiosInstance.post(`/api/holidays/`, {
-                startdate: startdateData, // Date de début corrigée
-                enddate:  enddateData   // Date de fin corrigée
+                startdate: startdateData,
+                enddate:  enddateData 
             }, config(token));
-            console.log(response);
-            return response.data.holidays;
+            return response.data.newHoliday;
         } catch (error) {
             console.error('Error creating holiday:', error);
             throw error;

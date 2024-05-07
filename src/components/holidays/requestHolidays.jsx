@@ -1,13 +1,11 @@
 import React from 'react';
 import { DateRangePicker } from 'rsuite';
 import 'rsuite/Button/styles/index.css';
-import useLocalStorage from '../../hooks/useLocalStorage';
-import holidaysController from '../../services/holidays.service';
 
-const RequestHolidays = () => {
-   const today = new Date();
+const RequestHolidays = ({ onCreateHolidayRequest, error, succes }) => {
+    const today = new Date();
     const [value, setValue] = React.useState([]);
-    const [getToken, _] = useLocalStorage();
+
     function formatDate(date) {
         var d = new Date(date),
             month = '' + (d.getMonth() + 1),
@@ -21,19 +19,12 @@ const RequestHolidays = () => {
 
         return [year, month, day].join('.');
     }
-    const createHolidayRequest = async (startDate, endDate) => {
-        try {
-            const createRequestHoliday = await holidaysController.createHoliday(getToken('token'), startDate, endDate);
-            return createRequestHoliday;
-        } catch (error) {
-            console.error('Error fetching holidays:', error);
-        }
-    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        const dates = value.map(date => formatDate(date))
-        console.log(dates);
-        createHolidayRequest(dates[0],dates[1])
+        const dates = value.map(date => formatDate(date));
+        setValue('');
+        onCreateHolidayRequest(dates[0], dates[1]);
     };
     return (
         <div className='datePicker'>
@@ -46,9 +37,11 @@ const RequestHolidays = () => {
                     showOneCalendar
                     format="dd.MM.yyyy"
                     placeholder="request a holiday"
-                    shouldDisableDate={(date) => date < today}
+                    shouldDisableDate={(date) => date - 1 < today}
                     showHeader={false}
                 />
+                {error && (<p>{error}</p>)}
+                {succes && (<p>{succes}</p>)}
                 <button id='submit' type="submit">Submit</button>
             </form>
         </div>
