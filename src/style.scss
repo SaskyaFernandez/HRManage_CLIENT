@@ -204,7 +204,7 @@ body {
             flex: 4.5;
             min-height: 100vh;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: flex-start;
             flex-wrap: wrap;
 
@@ -239,14 +239,151 @@ body {
                 text-align: start;
                 font-size: 28px;
                 font-weight: 700;
-                color: #333;
+                color: $black;
                 background-color: #FFFFFF;
             }
 
-            .holidaysParent div {
+            .holidaysLeft {
+                width: auto;
+
+                >div {
+                    display: flex;
+
+                    svg {
+                        width: 20px;
+                        height: auto;
+                        margin-left: 15px;
+
+                        &.rotate-360 {
+                            animation: rotate 1s infinite;
+                        }
+                    }
+
+                    @keyframes rotate {
+                        0% {
+                            transform: rotate(0deg)
+                        }
+
+                        100% {
+                            transform: rotate(360deg)
+                        }
+                    }
+                }
+
+                p {
+                    display: flex;
+                    display: flex;
+                    align-items: center;
+                    font-size: 40px;
+                    font-weight: 800;
+                    margin: 20px auto;
+
+                    svg {
+                        width: 35px;
+                        font-weight: 300;
+                        border: 3px solid #575757;
+                        border-radius: 10px;
+                        margin-right: 10px;
+                        padding: 2px 6px;
+                        height: 42px;
+                        stroke-width: 2px;
+                    }
+                }
+
+            }
+
+            .userIdDialog {
+                position: fixed;
+                top: 0;
+                margin: 0 !important;
+                right: 0;
+                width: 25% !important;
+                height: 100vh;
+                box-shadow: -5px 5px 61px gray;
+                z-index: 99;
+                background-color: $blanc_cassee;
+
+                P {
+                    padding: 5px 10px;
+                    background-color: $white;
+                    border-radius: 20px;
+                }
+
+                .image-centred {
+                    background-color: $white;
+                    border-radius: 20px;
+                    display: flex;
+                    justify-content: center;
+                    width: 100%;
+                    padding: 15px 0;
+                    margin: 5px 0;
+
+                    img {
+                        width: 185px;
+                        height: 185px;
+                        object-fit: cover;
+                        border-radius: 100%;
+                        margin: 0 auto;
+                    }
+                }
+
+                &.slideDetailUser {
+                    animation: slide 0.5s infinite;
+                }
+            }
+
+            @keyframes slide {
+                0% {
+                    right: -100%;
+                }
+
+                100% {
+                    right: 0;
+                }
+            }
+
+            .holidaysParent>div,
+            .userParent>div {
                 position: relative;
                 max-height: 400px;
                 overflow-y: scroll;
+
+                .reload {
+                    display: flex;
+                    position: sticky;
+                    z-index: 5;
+                    top: 0;
+                    background-color: $white;
+                    border: 8px solid white;
+                    border-bottom: 1px solid $white;
+
+                    caption {
+                        text-align: start;
+                        font-size: 28px;
+                        font-weight: 700;
+                        color: $black;
+                    }
+
+                    svg {
+                        width: 20px;
+                        height: auto;
+                        margin-left: 15px;
+
+                        &.rotate-360 {
+                            animation: rotate 1s infinite;
+                        }
+                    }
+
+                    @keyframes rotate {
+                        0% {
+                            transform: rotate(0deg)
+                        }
+
+                        100% {
+                            transform: rotate(360deg)
+                        }
+                    }
+                }
 
                 table {
                     border-spacing: 0px;
@@ -255,18 +392,20 @@ body {
                     position: sticky;
                     background-color: $white;
 
-                    caption {
+                    >caption {
                         border: 8px solid white;
                         border-bottom: 1px solid $white;
                         text-align: start;
                         font-size: 28px;
                         font-weight: 700;
-                        color: #333;
+                        color: $black;
                         position: sticky;
                         top: 0;
                         background-color: $white;
 
                     }
+
+
 
                     thead {
                         border: 8px solid white;
@@ -303,7 +442,7 @@ body {
                                     transform: translateY(-50%) rotate(-45deg);
                                 }
 
-                                &.ASC::after {
+                                &.DESC::after {
                                     content: "";
                                     border-style: solid;
                                     border-width: 0 2px 2px 0;
@@ -316,7 +455,7 @@ body {
                                     transform: translateY(-50%) rotate(-135deg);
                                 }
 
-                                &.DESC::after {
+                                &.ASC::after {
                                     content: "";
                                     border-style: solid;
                                     border-width: 0 2px 2px 0;
