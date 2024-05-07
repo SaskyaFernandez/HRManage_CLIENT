@@ -34,10 +34,8 @@ const LoginForm = () => {
                 setToken("token", response);
                 setError('');
                 setShowError(false);
-                console.log('1');
                 const decodedToken = jwtDecode(response);
                 setToken("id", decodedToken.userId);
-                console.log('1');
                 const user = await usersController.getUserByEmail(response, email)
                 currentUserContext.setUser(user)
                 navigate('/dashboard');
